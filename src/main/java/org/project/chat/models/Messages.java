@@ -11,7 +11,21 @@ public class Messages {
 	private long id;
 	private String from;
 	private String to;
+	private String dateReceived;
+	private String timeReceived;
 	
+	public String getDateReceived() {
+		return dateReceived;
+	}
+	public void setDateReceived(String dateReceived) {
+		this.dateReceived = dateReceived;
+	}
+	public String getTimeReceived() {
+		return timeReceived;
+	}
+	public void setTimeReceived(String timeReceived) {
+		this.timeReceived = timeReceived;
+	}
 	public String getFrom() {
 		return from;
 	}

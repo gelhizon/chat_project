@@ -34,7 +34,6 @@ public class Controller {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Messages send(Messages message){
 		service.sendMessage(message.getMessage(), message.getFrom(), message.getTo());
-		System.out.println(message.getMessage() + " " + message.getFrom() + " " + message.getTo());
 		return message;
 	}
 	
@@ -45,6 +44,14 @@ public class Controller {
 	public List<Messages> getMessage(Messages message){
 		
 		return service.getMessage(message.getFrom());
+	}
+	
+	@POST
+	@Path("/test")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Messages test(Messages message){
+		return service.getLatestMessage(message.getTimeReceived(), message.getFrom());
 	}
 	
 }

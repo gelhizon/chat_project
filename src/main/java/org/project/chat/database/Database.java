@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.project.chat.models.Messages;
@@ -71,13 +74,15 @@ public class Database {
 	public static void insert(String message, long sender_id, long receiver_id) throws Exception{
 		connect();
 		
-		String sql = "insert into message (sender_id, receiver_id, message) values (?,?,?)";
+		String sql = "insert into message (sender_id, receiver_id, message, date_received, time_received) values (?,?,?,?,?)";
 		
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		
 		stmt.setLong(1, sender_id);
 		stmt.setLong(2, receiver_id);
 		stmt.setString(3, message);
+		stmt.setString(4, new SimpleDateFormat("MM-dd-yyyy").format(new Date()));
+		stmt.setString(5, new SimpleDateFormat("h:mm:ss a").format(new Date()));
 		
 		stmt.executeUpdate();
 		
@@ -106,6 +111,28 @@ public class Database {
 		close();
 		
 		return messages;
+	}
+	
+	public static String getLatestMessage(String time_received, long receiver_id) throws Exception{
+		connect();
+		
+		String message = null;
+		
+		String sql = "select message from message where time_received=? and receiver_id=?";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		stmt.setString(1, time_received);
+		stmt.setLong(2, receiver_id);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		if(rs.next()){
+			message = rs.getString("message");
+		}
+		
+		close();
+		return message;
 	}
 	
 	public static long getId(String username) throws Exception{

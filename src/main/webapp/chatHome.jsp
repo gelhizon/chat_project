@@ -5,6 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
 <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -116,32 +118,29 @@
 </script>
 </head>
 <body>
-	
-	<input type="hidden" id="ids" value="<%= request.getParameter("user") %>" />
-	
-	<table>
-	
-	<tr>
-		<td>
-			<h2>Welcome <%= request.getParameter("user") %></h2>
-			<h2>Chat Message:</h2>
-			<div id="chat"><textarea rows="5" cols="20" id="messageRe" readonly></textarea></div>
-			<h2>To:</h2>
-			<input type="text" id="to" />
-			<br>
-			<h2>From:</h2>
-			<input type="text" id="from" value="<%= request.getParameter("user") %>" />
-			<br>
-			<h2>Message:</h2>
-			<input type="text" id="message" />
-			<br>
-			<input type="submit" value="send" id="send" />
-			<br>
-			<input type="submit" value="refresh" id="refresh" />
-		</td>
-	</tr>
-	
-	</table>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-sm-offset-4">
+				<input type="hidden" id="ids" value="<%= request.getParameter("user") %>" />
+		
+				<h3>Welcome <%= request.getParameter("user") %></h3>
+				<h3>Chat Message:</h3>
+				<div id="chat"><textarea class="form-control" rows="5" cols="20" id="messageRe" readonly></textarea></div>
+				<h3>To:</h3>
+				<input class="form-control" type="text" id="to" />
+				
+				<h3>From:</h3>
+				<input class="form-control" type="text" id="from" value="<%= request.getParameter("user") %>" />
+				
+				<h3>Message:</h3>
+				<input class="form-control" type="text" id="message" />
+				
+				<input class="btn btn-primary pull-right" type="submit" value="send" id="send" />
+				
+				<input class="btn btn-success pull-right" type="submit" value="refresh" id="refresh" />
+			</div>
+		</div>
+	</div>
 	
 </body>
 </html>
